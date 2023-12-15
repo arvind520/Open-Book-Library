@@ -1,0 +1,30 @@
+body{
+    background-color: whitesmoke;
+}
+
+.foot-text{
+    
+}
+
+.movie-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.card {
+    width: 20vw;
+    border-radius: 10px;
+    box-shadow: 3px 4px 14px 1px rgba(0,0,0,0.71);
+-webkit-box-shadow: 3px 4px 14px 1px rgba(0,0,0,0.71);
+-moz-box-shadow: 3px 4px 14px 1px rgba(0,0,0,0.71);
+}
+
+.card img{
+    height: 350px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}

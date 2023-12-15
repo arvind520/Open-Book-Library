@@ -1,0 +1,22 @@
+<%- include("partials/header.ejs") %>
+    <h1>Search for movies and add in your database.</h1>
+    <form action="/search" method="post">
+        <input type="text" name="search">
+        <button>Submit</button>
+    </form>
+    <% if(locals.movies){ %>
+        <div class="movie-list">
+            <% locals.movies.forEach(function (movie) { %>
+                <div class="card">
+                    <img src=<%= movie.Poster %> />
+                    <div class="card-body">
+                        <h5 class="card-title"><%= movie.Title %></h5>
+                        <p class="card-text"><%= movie.Year %></p>
+                        <a href="/details/<%= movie.imdbID %>" class="btn btn-primary">More</a>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+
+    <% } %>
+<%- include("partials/footer.ejs") %>
