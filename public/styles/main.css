@@ -12,12 +12,18 @@ body{
     margin-top: 30px;
 }
 
-.card {
+.card-movies {
     width: 20vw;
     border-radius: 10px;
     box-shadow: 3px 4px 14px 1px rgba(0,0,0,0.71);
 -webkit-box-shadow: 3px 4px 14px 1px rgba(0,0,0,0.71);
 -moz-box-shadow: 3px 4px 14px 1px rgba(0,0,0,0.71);
+transition: all 0.2s;
+}
+
+.card-movies:hover {
+    cursor: pointer;
+  transform: scaleY(1.02);
 }
 
 .card img{
