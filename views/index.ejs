@@ -9,8 +9,9 @@
                         <p class="card-text"><%= movie.Year %></p>
                         <div class="d-flex justify-content-between" style="gap: 10px;">
                             <a href="/details/<%= movie.imdbID %>" class="btn btn-primary" style="height: min-content;">More</a>
-                            <form action="/add">
+                            <form action="/addfavorite" method="post">
                                 <input type="hidden" name="id" value="<%= movie.imdbID %>"/>
+                                <input type="hidden" name="search" value="<%= searchInput %>"/>
                                 <button type="submit" class="btn btn-success addToWatchlist">Add to Watchlist</button>
                             </form>
                         </div>
