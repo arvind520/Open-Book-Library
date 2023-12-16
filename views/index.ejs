@@ -1,9 +1,4 @@
 <%- include("partials/header.ejs") %>
-    <h1>Search for movies and add in your database.</h1>
-    <form action="/search" method="post">
-        <input type="text" name="search">
-        <button>Submit</button>
-    </form>
     <% if(locals.movies){ %>
         <div class="movie-list">
             <% locals.movies.forEach(function (movie) { %>
@@ -12,7 +7,13 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= movie.Title %></h5>
                         <p class="card-text"><%= movie.Year %></p>
-                        <a href="/details/<%= movie.imdbID %>" class="btn btn-primary">More</a>
+                        <div class="d-flex justify-content-between">
+                            <a href="/details/<%= movie.imdbID %>" class="btn btn-primary">More</a>
+                            <form action="/add">
+                                <input type="hidden" name="id" value="<%= movie.imdbID %>"/>
+                                <button type="submit" class="btn btn-success addToWatchlist">Add to Watchlist</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             <% }); %>
