@@ -1,0 +1,39 @@
+<%- include("partials/header.ejs") %>
+    <div class="container mt-5 mx-auto">
+        <div class="card mb-3 py-5">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex justify-content-center my-3">
+                    <img src="<%= movie.Poster %>" class="img-fluid rounded" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <%= movie.Title %>
+                        </h3>
+                        <p class="card-text">
+                            <%= movie.Plot %>
+                        </p>
+                        <ul>
+                            <li>Rating: <%= movie.Ratings[0].Value %>
+                            </li>
+                            <li>Country: <%= movie.Country %>
+                            </li>
+                            <li>Language: <%= movie.Language %>
+                            </li>
+                            <li>Director(s): <%= movie.Director %>
+                            </li>
+                            <li>Actors(s): <%= movie.Actors %>
+                            </li>
+                        </ul>
+                        <p class="card-text"><small class="text-body-secondary">Released: <%= movie.Released %></small>
+                        </p>
+                    </div>
+                    <form action="/addfavorite">
+                        <input type="hidden" name="id" value=<%= movie.imdbID %> />
+                        <button class="btn btn-outline-success">Add to Favorite</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include("partials/footer.ejs") %>
