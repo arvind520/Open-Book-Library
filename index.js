@@ -23,7 +23,6 @@ app.get("/", async(req, res) => {
 app.post("/search", async(req, res) => {
     let searchInput = req.body.search.trim();
     const movies = await fetchMovies(searchInput);
-    console.log(movies)
     res.render("index.ejs", {movies})
 })
 
