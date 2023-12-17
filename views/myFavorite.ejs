@@ -9,7 +9,7 @@
                     <p class="card-text"><%= movie.released %></p>
                     <p class="card-text"><small class="text-body-secondary">Plot: <%= movie.plot %></small>
                     <div class="d-flex justify-content-between" style="gap: 10px;">
-                        <form action="/addfavorite" method="post">
+                        <form action="/removefavorite" method="post">
                             <input type="hidden" name="id" value="<%= movie.imdbid %>"/>
                             <button type="submit" class="btn btn-danger addToWatchlist">Remove</button>
                         </form>
@@ -18,5 +18,7 @@
             </div>
         <% }); %>
     </div>
+<% } else { %>
+    <div class="alert alert-warning text-center" role="alert">No movies in favorite list!</div>
 <% } %>
 <%- include("partials/footer.ejs") %>
