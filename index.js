@@ -43,8 +43,10 @@ const addToFavorite = async(movie) => {
         await db.query("insert into movies ( Title, Released, Runtime, Genre, Director, Actors, Plot, MovieLanguage, Poster, imdbRating, imdbID ) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)", [
             Title, Released, Runtime, Genre, Director, Actors, Plot, MovieLanguage, Poster, imdbRating, imdbID
         ])
+        return {success: true}
     } catch (error) {
         console.log("unable to add in DB", error)
+        return {success: false}
     }
 }
 
@@ -53,6 +55,14 @@ const getMyFavorite = async() => {
         const res = await db.query("select * from movies")
         if (!res.rows[0]) throw Error('No favorite movie found');
         else return res.rows;
+    } catch (error) {
+        console.log("Unable to fetch", error)
+    }
+}
+
+const removeMyFavorite = async(id) => {
+    try {
+        await db.query("delete from movies where imdbid = $1", [id])
     } catch (error) {
         console.log("Unable to fetch", error)
     }
@@ -76,11 +86,12 @@ app.get("/details/:id", async(req, res) => {
 
 app.post("/addfavorite", async(req, res) => {
     const movie = await fetchDetailMovie(req.body.id);
-    await addToFavorite(movie)
+    const result = await addToFavorite(movie)
+    console.log(result)
     if(req.body.search){
         let searchInput = req.body.search.trim();
         const movies = await fetchMovies(searchInput);
-        res.render("index.ejs", {movies, searchInput})
+        res.render("index.ejs", {movies, searchInput, result})
     }else{
         res.redirect("/details/"+req.body.id)
     }
@@ -88,7 +99,12 @@ app.post("/addfavorite", async(req, res) => {
 
 app.get("/myfavorite", async (req, res) => {
     const movies = await getMyFavorite()
-    console.log(movies)
+    res.render("myFavorite.ejs", {movies});
+})
+
+app.post("/removefavorite", async(req,res) => {
+    await removeMyFavorite(req.body.id);
+    const movies = await getMyFavorite()
     res.render("myFavorite.ejs", {movies});
 })
 

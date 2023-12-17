@@ -1,4 +1,11 @@
 <%- include("partials/header.ejs") %>
+    <% if(locals.result){ %>
+        <% if(result.success) {%>
+            <div class="alert alert-success text-center" role="alert">Movie is added to your favorite list.</div>
+        <% } else {%>
+            <div class="alert alert-warning text-center" role="alert">Unable to add in your favorite list. (May be already in your list)</div>
+        <% } %>
+    <% } %>
     <% if(locals.movies){ %>
         <div class="movie-list">
             <% locals.movies.forEach(function (movie) { %>
