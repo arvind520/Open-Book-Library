@@ -31,3 +31,12 @@ transition: all 0.2s;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+
+.home-search{
+    width: 25vw;
+}
+
+.foot-text{
+    position: fixed;
+    bottom: 0;
+}

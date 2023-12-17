@@ -48,6 +48,16 @@ const addToFavorite = async(movie) => {
     }
 }
 
+const getMyFavorite = async() => {
+    try {
+        const res = await db.query("select * from movies")
+        if (!res.rows[0]) throw Error('No favorite movie found');
+        else return res.rows;
+    } catch (error) {
+        console.log("Unable to fetch", error)
+    }
+}
+
 app.get("/", async(req, res) => {
     res.render("index.ejs");
 })
@@ -66,7 +76,7 @@ app.get("/details/:id", async(req, res) => {
 
 app.post("/addfavorite", async(req, res) => {
     const movie = await fetchDetailMovie(req.body.id);
-    addToFavorite(movie)
+    await addToFavorite(movie)
     if(req.body.search){
         let searchInput = req.body.search.trim();
         const movies = await fetchMovies(searchInput);
@@ -74,6 +84,12 @@ app.post("/addfavorite", async(req, res) => {
     }else{
         res.redirect("/details/"+req.body.id)
     }
+})
+
+app.get("/myfavorite", async (req, res) => {
+    const movies = await getMyFavorite()
+    console.log(movies)
+    res.render("myFavorite.ejs", {movies});
 })
 
 app.listen(3000, () => console.log("server is running on: http://localhost:3000/"))
